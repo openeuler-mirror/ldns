@@ -28,16 +28,15 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	22
+Release: 	23
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
 Url: 		https://www.nlnetlabs.nl/projects/%{name}/about/
 Source0:        https://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 
-Patch1: 	%{name}-1.7.0-multilib.patch
-Patch2: 	%{name}-1.7.0-parse-limit.patch
-Patch3: 	%{name}-1.7.0-realloc.patch
+Patch1: 	%{name}-1.7.0-parse-limit.patch
+Patch2: 	%{name}-1.7.0-realloc.patch
 
 %if 0%{snapshot}
 BuildRequires: 	libtool autoconf automake 
@@ -129,9 +128,8 @@ Man pages and other related documents for %{name}.
 %setup -qcn %{pkgname}
 pushd %{pkgname}
 
-%patch1 -p2 -b .multilib
-%patch2 -p1 -b .limit
-%patch3 -p1 -b .realloc
+%patch1 -p1 -b .limit
+%patch2 -p1 -b .realloc
 
 %if 0%{snapshot}
   rm config.guess config.sub ltmain.sh
@@ -324,5 +322,8 @@ rm -rf doc/man
 %endif
 
 %changelog
-* Sat Sep 21 2019 openEuler Buildteam <buildteam@openeuler.org> - 0.17.9-4
+* Sat Jan 11 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-23
+- Delete useless info
+
+* Sat Sep 21 2019 openEuler Buildteam <buildteam@openeuler.org> - 1.7.0-22
 - Package init
