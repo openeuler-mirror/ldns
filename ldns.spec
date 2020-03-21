@@ -1,4 +1,6 @@
 %global _hardened_build 1
+%globa1 with_python2 1
+%global with_python3 1
 
 %bcond_without  perl
 %bcond_without  ecdsa
