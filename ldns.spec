@@ -1,4 +1,6 @@
 %global _hardened_build 1
+%global with_python2 1
+%global with_python3 1
 
 %bcond_without  perl
 %bcond_without  ecdsa
@@ -28,7 +30,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	23
+Release: 	25
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -42,7 +44,7 @@ Patch2: 	%{name}-1.7.0-realloc.patch
 BuildRequires: 	libtool autoconf automake 
 %endif
 
-BuildRequires: 	gcc make libpcap-devel gcc-c++ doxygen
+BuildRequires: 	gcc make libpcap-devel gcc-c++ doxygen gdb
 %if %{with dane_ta}
 BuildRequires: 	openssl-devel >= 1.1.0
 %else
@@ -322,6 +324,9 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Sat Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
+- fix build bug,add flag with_python2 and with_python3
+
 * Sat Jan 11 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-23
 - Delete useless info
 
