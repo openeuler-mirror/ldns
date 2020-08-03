@@ -30,7 +30,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	25
+Release: 	26
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -39,6 +39,7 @@ Source0:        https://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.ta
 
 Patch1: 	%{name}-1.7.0-parse-limit.patch
 Patch2: 	%{name}-1.7.0-realloc.patch
+Patch3: 	%{name}-1.7.0-Update-for-SWIG-4.patch
 
 %if 0%{snapshot}
 BuildRequires: 	libtool autoconf automake 
@@ -132,6 +133,7 @@ pushd %{pkgname}
 
 %patch1 -p1 -b .limit
 %patch2 -p1 -b .realloc
+%patch3 -p1
 
 %if 0%{snapshot}
   rm config.guess config.sub ltmain.sh
@@ -324,6 +326,12 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Mon Aug 03 2020 gaihuiying <gaihuiying1@huawei.com> - 1.7.0-26
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:fix build fail with swig new version
+
 * Sat Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
 - fix build bug,add flag with_python2 and with_python3
 
