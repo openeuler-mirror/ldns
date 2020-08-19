@@ -30,7 +30,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	25
+Release: 	26
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -324,6 +324,9 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Tue Aug 18 2020 chenyaqiang <chenyaqiang@huawei.com> - 1.7.0-26
+- rebuild for package build
+
 * Sat Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
 - fix build bug,add flag with_python2 and with_python3
 
