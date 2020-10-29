@@ -1,5 +1,4 @@
 %global _hardened_build 1
-%global with_python2 1
 %global with_python3 1
 
 %bcond_without  perl
@@ -12,7 +11,7 @@
 
 %{?!snapshot:         %global snapshot        0}
 
-%if %{with_python2} || %{with_python3}
+%if %{with_python3}
 %{?filter_setup:
 %global _ldns_internal_filter /^_ldns[.]so.*/d;
 %filter_from_requires %{_ldns_internal_filter}
@@ -30,7 +29,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	26
+Release: 	27
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -52,9 +51,6 @@ BuildRequires: 	openssl-devel >= 1.1.0
 BuildRequires: 	openssl-devel >= 1.0.2k
 %endif
 
-%if %{with_python2}
-BuildRequires: 	python2-devel, swig
-%endif
 %if %{with_python3}
 BuildRequires: 	python3-devel, swig
 %endif
@@ -82,17 +78,6 @@ Obsoletes:      %{name}-utils
 %description 	devel
 %{name}-devel contains the header files for developing
 applications that want to make use of %{name}.
-
-%if %{with python2}
-%package   	-n python2-%{name}
-Summary: 	Python2 extensions for %{name}
-Requires: 	%{name} = %{version}-%{release}
-%{?python_provide:%python_provide python2-%{name}}
-
-%description 	-n python2-%{name}
-Python2 packages for %{name}
-%endif
-
 
 %if %{with python3}
 %package 	-n python3-%{name}
@@ -152,10 +137,6 @@ popd
 %if %{with python3}
 mv %{pkgname} %{pkgname}_python3
 %endif
-
-%if %{with python2}
-cp -a %{pkgname}_python3 %{pkgname}_python2
-%endif 
 
 %build
 CFLAGS="%{optflags} -fPIC"
@@ -222,16 +203,6 @@ make %{?_smp_mflags} doc
 sed -i "s~$RPM_LD_FLAGS~~" packaging/ldns-config
 popd
 
-%if %{with_python2}
-  pushd %{pkgname}_python2
-  %configure \
-    %{common_args} \
-    --with-pyldns PYTHON=%{__python2}
-
-  make %{?_smp_mflags}
-  popd
-%endif
-
 %install
 rm -rf %{buildroot}
 
@@ -257,14 +228,6 @@ install -D -m644  packaging/libldns.pc %{buildroot}%{_libdir}/pkgconfig/ldns.pc
 %endif
 popd
 
-%if %{with_python2}
-  pushd %{pkgname}_python2
-  make DESTDIR=%{buildroot} INSTALL="%{__install} -p" install-pyldns install-pyldnsx
-  rm -rf %{buildroot}%{_libdir}/*.la %{buildroot}%{python2_sitearch}/*.la
-  popd
-%endif
-
-
 rm doc/*.xml
 
 rm doc/doxyparse.pl
@@ -289,13 +252,6 @@ rm -rf doc/man
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*.h
 
-%if %{with_python2}
-%files -n python2-%{name}
-%defattr(-,root,root)
-%license LICENSE.ldnsx
-%{python2_sitearch}/*
-%endif
-
 %if %{with_python3}
 %files -n python3-ldns
 %defattr(-,root,root)
@@ -315,9 +271,6 @@ rm -rf doc/man
 %doc doc README Changelog README.git
 %{_mandir}/man1/*
 %{_mandir}/man3/*.3.gz
-%if %{with_python2}
-%doc %{pkgname}_python2/contrib/python/Changelog README.ldnsx
-%endif
 %if %{with_python3}
 %doc %{pkgname}_python3/contrib/python/Changelog README.ldnsx
 %endif
@@ -326,6 +279,12 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Thu Oct 29 2020 gaihuiying <gaihuiying1@huawei.com> - 1.7.0-27
+- Type:rquirement
+- ID:NA
+- SUG:NA
+- DESC:remove python2, don't support python2 anymore
+
 * Mon Aug 03 2020 gaihuiying <gaihuiying1@huawei.com> - 1.7.0-26
 - Type:bugfix
 - ID:NA
