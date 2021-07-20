@@ -29,7 +29,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	27
+Release: 	28
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -44,7 +44,7 @@ Patch3: 	%{name}-1.7.0-Update-for-SWIG-4.patch
 BuildRequires: 	libtool autoconf automake 
 %endif
 
-BuildRequires: 	gcc make libpcap-devel gcc-c++ doxygen gdb
+BuildRequires: 	gcc make libpcap-devel gcc-c++ doxygen
 %if %{with dane_ta}
 BuildRequires: 	openssl-devel >= 1.1.0
 %else
@@ -279,6 +279,12 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Mon Jul 19 2021 lijingyuan <lijingyuan3@huawei.com> - 1.7.0-28
+- Type:requirement
+- ID:NA
+- SUG:NA
+- DESC:cancel gdb in buildrequires
+
 * Thu Oct 29 2020 gaihuiying <gaihuiying1@huawei.com> - 1.7.0-27
 - Type:rquirement
 - ID:NA
