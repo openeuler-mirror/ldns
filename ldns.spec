@@ -29,7 +29,7 @@
 
 Name: 		ldns
 Version: 	1.7.0
-Release: 	28
+Release: 	29
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
@@ -39,6 +39,7 @@ Source0:        https://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.ta
 Patch1: 	%{name}-1.7.0-parse-limit.patch
 Patch2: 	%{name}-1.7.0-realloc.patch
 Patch3: 	%{name}-1.7.0-Update-for-SWIG-4.patch
+Patch4:		%{name}-1.7.0-delete-lib-check.patch
 
 %if 0%{snapshot}
 BuildRequires: 	libtool autoconf automake 
@@ -279,6 +280,9 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Thu Sep 9 2021 zoutongcheng <chengzou233@gmail.com> - 1.7.0-29
+- Delete useless lib check
+
 * Mon Jul 19 2021 lijingyuan <lijingyuan3@huawei.com> - 1.7.0-28
 - Type:requirement
 - ID:NA

@@ -1,0 +1,11 @@
+--- Makefile.PL.orig	2021-09-28 22:53:31.884796946 +0800
++++ Makefile.PL	2021-09-28 22:54:15.595288527 +0800
+@@ -4,8 +4,6 @@
+ use Devel::CheckLib;
+ 
+ check_lib_or_exit( 
+-    lib      => 'ldns', 
+-    header   => 'ldns/ldns.h', 
+     function => 'if(atof(ldns_version()) >= 1.6) return 0; else return 1;'
+ );
+ 
