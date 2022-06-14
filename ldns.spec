@@ -294,7 +294,7 @@ rm -rf doc/man
 - SUG:NA
 - DESC:fix build fail with swig new version
 
-* Sat Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
+* Sun Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
 - fix build bug,add flag with_python2 and with_python3
 
 * Sat Jan 11 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-23
