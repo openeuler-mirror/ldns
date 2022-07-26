@@ -36,6 +36,8 @@ License: 	BSD
 Url: 		https://www.nlnetlabs.nl/projects/%{name}/about/
 Source0:        https://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 
+Patch4:		%{name}-1.7.0-delete-lib-check.patch
+
 %if 0%{snapshot}
 BuildRequires: 	libtool autoconf automake 
 %endif
@@ -275,6 +277,9 @@ rm -rf doc/man
 - ID:NA
 - SUG:NA
 - DESC:update ldns to 1.8.1 to support python3.10
+
+* Thu Sep 9 2021 zoutongcheng <chengzou233@gmail.com> - 1.7.0-29
+- Delete useless lib check
 
 * Mon Jul 19 2021 lijingyuan <lijingyuan3@huawei.com> - 1.7.0-28
 - Type:requirement
