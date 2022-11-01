@@ -28,17 +28,14 @@
 %endif
 
 Name: 		ldns
-Version: 	1.7.0
-Release: 	29
+Version: 	1.8.1
+Release: 	1
 Summary:        Low-level DNS(SEC) library with API
 
 License: 	BSD
 Url: 		https://www.nlnetlabs.nl/projects/%{name}/about/
 Source0:        https://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 
-Patch1: 	%{name}-1.7.0-parse-limit.patch
-Patch2: 	%{name}-1.7.0-realloc.patch
-Patch3: 	%{name}-1.7.0-Update-for-SWIG-4.patch
 Patch4:		%{name}-1.7.0-delete-lib-check.patch
 
 %if 0%{snapshot}
@@ -116,10 +113,6 @@ Man pages and other related documents for %{name}.
 
 %setup -qcn %{pkgname}
 pushd %{pkgname}
-
-%patch1 -p1 -b .limit
-%patch2 -p1 -b .realloc
-%patch3 -p1
 
 %if 0%{snapshot}
   rm config.guess config.sub ltmain.sh
@@ -213,15 +206,14 @@ pushd %{pkgname}_python3
 pushd %{pkgname}
 %endif
 
-make DESTDIR=%{buildroot} INSTALL="%{__install} -p" install
-make DESTDIR=%{buildroot} INSTALL="%{__install} -p" install-doc
+make DESTDIR=%{buildroot} INSTALL="%{__install} -pD" install
+make DESTDIR=%{buildroot} INSTALL="%{__install} -pD" install-doc
 
 %delete_la
 %if %{with_python3}
 rm -rf %{buildroot}%{python3_sitearch}/*.la
 %endif
 
-install -D -m644  packaging/libldns.pc %{buildroot}%{_libdir}/pkgconfig/ldns.pc
 %if %{with perl}
   make -C contrib/DNS-LDNS DESTDIR=%{buildroot} pure_install
   chmod 755 %{buildroot}%{perl_vendorarch}/auto/DNS/LDNS/LDNS.so
@@ -280,6 +272,12 @@ rm -rf doc/man
 %endif
 
 %changelog
+* Tue Apr 19 2022 gaihuiying <eaglegai@163.com> - 1.8.1-1
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:update ldns to 1.8.1 to support python3.10
+
 * Thu Sep 9 2021 zoutongcheng <chengzou233@gmail.com> - 1.7.0-29
 - Delete useless lib check
 
@@ -301,7 +299,7 @@ rm -rf doc/man
 - SUG:NA
 - DESC:fix build fail with swig new version
 
-* Sat Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
+* Sun Mar 22 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-25
 - fix build bug,add flag with_python2 and with_python3
 
 * Sat Jan 11 2020 openEuler Buildyeam <buildteam@openeuler.org> - 1.7.0-23
